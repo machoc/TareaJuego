@@ -9,10 +9,17 @@ import tareajuego.control.Control;
 
 
 public class JPanelThread extends JPanel implements Runnable{
+
+    public JPanelThread() {
+        this.iniciar();
+    }
+    
+    
      @Override
     public void run() {
        while (hiloPrincipal == Thread.currentThread() && bandera){
            try {
+               caidaMaiz();
              
                
                 repaint();
@@ -44,10 +51,14 @@ public class JPanelThread extends JPanel implements Runnable{
             }
     }
     
+    private void caidaMaiz(){
+        
+    }
+    
  
     private void dibujarComponentes(Graphics g) {
-        
-       
+       Random rd = new Random();
+       int xMaiz = (int)(rd.nextDouble()*900-0) ;
        int yCanasta= this.getWidth() - 150 ;
       if(xCanasta==0){
           setXCanasta();
@@ -55,6 +66,7 @@ public class JPanelThread extends JPanel implements Runnable{
           limiteDerecho = this.getWidth()-170;
       }
         g.drawImage(canasta, xCanasta , yCanasta,null);
+        g.drawImage(maiz, xMaiz, yMaiz, null);
         
     }
     
@@ -84,6 +96,9 @@ public class JPanelThread extends JPanel implements Runnable{
     private Thread hiloPrincipal = null;
     private boolean bandera = false;
     private Image canasta= new ImageIcon(this.getClass().getResource("../vista/imagenes/canasta.png")).getImage();
+    private Image maiz = new ImageIcon(this.getClass().getResource("../vista/imagenes/maiz.png")).getImage();
     private int xCanasta=0;
+    private int xMaiz = 400;
+    private int yMaiz = -3;
 
 }

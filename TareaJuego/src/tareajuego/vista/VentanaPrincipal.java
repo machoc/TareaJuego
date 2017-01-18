@@ -31,7 +31,7 @@ public class VentanaPrincipal extends JFrame implements Observer {
     private void ajustarConfiguracionInicial(){
         setTitle("Tarea Juego");
         setSize(900,1000);
-        setResizable(false);
+        setResizable(true);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setFocusable(true);
