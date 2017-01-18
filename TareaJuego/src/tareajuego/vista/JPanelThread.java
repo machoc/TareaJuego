@@ -24,7 +24,7 @@ public class JPanelThread extends JPanel implements Runnable{
                
                 repaint();
               
-               Thread.sleep(20);
+               Thread.sleep(500);
            } catch (InterruptedException ex) {
                System.out.println("Ocurrio un error de interrupcion...");
            }
@@ -52,13 +52,12 @@ public class JPanelThread extends JPanel implements Runnable{
     }
     
     private void caidaMaiz(){
-        
+        yMaiz += 20;
     }
     
  
     private void dibujarComponentes(Graphics g) {
        Random rd = new Random();
-       int xMaiz = (int)(rd.nextDouble()*900-0) ;
        int yCanasta= this.getWidth() - 150 ;
       if(xCanasta==0){
           setXCanasta();
