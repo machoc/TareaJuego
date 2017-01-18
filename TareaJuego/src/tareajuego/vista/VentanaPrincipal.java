@@ -105,8 +105,7 @@ public class VentanaPrincipal extends JFrame implements Observer {
     }
     
     public void darFocusVentana(){
-        setFocusable(true);
-        setFocusTraversalKeysEnabled(false);
+        this.requestFocus();
     }
     
     

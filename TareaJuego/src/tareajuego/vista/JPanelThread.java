@@ -49,8 +49,11 @@ public class JPanelThread extends JPanel implements Runnable{
         
        
        int yCanasta= this.getWidth() - 150 ;
-      if(xCanasta==0)
+      if(xCanasta==0){
           setXCanasta();
+          limiteIzquierdo = 30;
+          limiteDerecho = this.getWidth()-170;
+      }
         g.drawImage(canasta, xCanasta , yCanasta,null);
         
     }
@@ -65,14 +68,18 @@ public class JPanelThread extends JPanel implements Runnable{
     }
     
     public void moverIzquierda(){
+        if(xCanasta > limiteIzquierdo)
         xCanasta -= 15;
     }
     
     public void moverDerecha(){
+         if(xCanasta < limiteDerecho)
          xCanasta += 15;
     }
     
     //---ATRIBUTOS
+    private int limiteIzquierdo;
+    private int limiteDerecho;
     private Control control;
     private Thread hiloPrincipal = null;
     private boolean bandera = false;
