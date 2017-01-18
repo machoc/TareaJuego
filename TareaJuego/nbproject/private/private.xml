@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< Updated upstream
             <file>file:/C:/Users/juanp/Documents/GitHub/TareaJuego/TareaJuego/src/tareajuego/vista/JPanelConFondo.java</file>
             <file>file:/C:/Users/juanp/Documents/GitHub/TareaJuego/TareaJuego/src/tareajuego/vista/JPanelThread.java</file>
             <file>file:/C:/Users/juanp/Documents/GitHub/TareaJuego/TareaJuego/src/tareajuego/TareaJuego.java</file>
@@ -10,6 +11,15 @@
             <file>file:/C:/Users/juanp/Documents/GitHub/TareaJuego/TareaJuego/src/tareajuego/control/Control.java</file>
             <file>file:/C:/Users/juanp/Documents/GitHub/TareaJuego/TareaJuego/src/tareajuego/vista/VentanaPrincipal.java</file>
             <file>file:/C:/Users/juanp/Documents/GitHub/TareaJuego/TareaJuego/src/tareajuego/modelo/Jugador.java</file>
+=======
+            <file>file:/Users/luisalejandro/Desktop/TareaJuego/TareaJuego/src/tareajuego/modelo/Modelo.java</file>
+            <file>file:/Users/luisalejandro/Desktop/TareaJuego/TareaJuego/src/tareajuego/modelo/Jugador.java</file>
+            <file>file:/Users/luisalejandro/Desktop/TareaJuego/TareaJuego/src/tareajuego/TareaJuego.java</file>
+            <file>file:/Users/luisalejandro/Desktop/TareaJuego/TareaJuego/src/tareajuego/vista/imagenes/fondo.jpg</file>
+            <file>file:/Users/luisalejandro/Desktop/TareaJuego/TareaJuego/src/tareajuego/vista/JPanelThread.java</file>
+            <file>file:/Users/luisalejandro/Desktop/TareaJuego/TareaJuego/src/tareajuego/vista/JPanelConFondo.java</file>
+            <file>file:/Users/luisalejandro/Desktop/TareaJuego/TareaJuego/src/tareajuego/vista/VentanaPrincipal.java</file>
+>>>>>>> Stashed changes
         </group>
     </open-files>
 </project-private>
