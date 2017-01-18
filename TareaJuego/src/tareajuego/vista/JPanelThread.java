@@ -21,10 +21,17 @@ public class JPanelThread extends JPanel implements Runnable{
            try {
                caidaMaiz();
              
+               if (yMaiz>yCanasta-36 &&( xMaiz> xCanasta -28 && xMaiz< xCanasta +100)){
+                    resetearObjetoCallendo();
+               }
                
+               if(yMaiz > yCanasta+140){
+                   resetearObjetoCallendo();
+               }
+                  
                 repaint();
               
-               Thread.sleep(500);
+               Thread.sleep(20);
            } catch (InterruptedException ex) {
                System.out.println("Ocurrio un error de interrupcion...");
            }
@@ -52,15 +59,16 @@ public class JPanelThread extends JPanel implements Runnable{
     }
     
     private void caidaMaiz(){
-        yMaiz += 20;
+        yMaiz += 3;
     }
     
  
     private void dibujarComponentes(Graphics g) {
-       Random rd = new Random();
-       int yCanasta= this.getWidth() - 150 ;
+       if(xMaiz==0){
+           xMaiz=ThreadLocalRandom.current().nextInt(40,this.getWidth()-160);
+       }
       if(xCanasta==0){
-          setXCanasta();
+          setXYCanasta();
           limiteIzquierdo = 30;
           limiteDerecho = this.getWidth()-170;
       }
@@ -74,7 +82,8 @@ public class JPanelThread extends JPanel implements Runnable{
         iniciar();
     }  
     
-    public void setXCanasta(){
+    public void setXYCanasta(){
+        yCanasta= this.getWidth() - 150 ;
         xCanasta= this.getHeight()/2- 70;
     }
     
@@ -88,6 +97,11 @@ public class JPanelThread extends JPanel implements Runnable{
          xCanasta += 15;
     }
     
+    public void resetearObjetoCallendo(){
+        xMaiz=0;
+        yMaiz=-50;
+    }
+    
     //---ATRIBUTOS
     private int limiteIzquierdo;
     private int limiteDerecho;
@@ -96,8 +110,9 @@ public class JPanelThread extends JPanel implements Runnable{
     private boolean bandera = false;
     private Image canasta= new ImageIcon(this.getClass().getResource("../vista/imagenes/canasta.png")).getImage();
     private Image maiz = new ImageIcon(this.getClass().getResource("../vista/imagenes/maiz.png")).getImage();
+    private int yCanasta=0;
     private int xCanasta=0;
-    private int xMaiz = 400;
-    private int yMaiz = -3;
+    private int xMaiz = 0;
+    private int yMaiz = -50;
 
 }
