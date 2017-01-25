@@ -22,6 +22,8 @@ public class JPanelThread extends JPanel implements Runnable{
                caidaMaiz();
                caidaTomate();
                caidaBomba();
+               caidaNaranja();
+               caidaPina();
                if (yMaiz>yCanasta-36 &&( xMaiz> xCanasta -28 && xMaiz< xCanasta +100)){
                     resetearMaizCayendo();
                }
@@ -40,6 +42,18 @@ public class JPanelThread extends JPanel implements Runnable{
                }
                if(yBomba > yCanasta+140){
                    resetearBombaCayendo();
+               }
+               if(yNaranja>yCanasta-36 &&( xNaranja>xCanasta -28 && xNaranja < xCanasta +100)){
+                   resetearNaranjaCayendo();
+               }
+               if(yNaranja > yCanasta+140){
+                   resetearNaranjaCayendo();
+               }
+               if(yPina>yCanasta-36 &&( xPina>xCanasta -28 && xPina < xCanasta +100)){
+                   resetearPinaCayendo();
+               }
+               if(yPina > yPina+140){
+                   resetearPinaCayendo();
                }
                   
                 repaint();
@@ -83,6 +97,14 @@ public class JPanelThread extends JPanel implements Runnable{
         yBomba += 3;
     }
     
+    private void caidaNaranja(){
+        yNaranja += 5;
+    }
+    
+    private void caidaPina(){
+        yPina+= 7;
+    }
+    
  
     private void dibujarComponentes(Graphics g) {
        if(xMaiz==0){
@@ -99,10 +121,18 @@ public class JPanelThread extends JPanel implements Runnable{
       if(xBomba==0){
           xBomba=ThreadLocalRandom.current().nextInt(40,this.getWidth()-160);
       }
+      if(xNaranja==0){
+          xNaranja = ThreadLocalRandom.current().nextInt(40, this.getWidth()-160);
+      }
+      if(xPina==0){
+          xPina = ThreadLocalRandom.current().nextInt(40, this.getWidth()-160);
+      }
         g.drawImage(canasta, xCanasta , yCanasta,null);
         g.drawImage(maiz, xMaiz, yMaiz, null);
         g.drawImage(tomate, xTomate, yTomate, null);
         g.drawImage(bomba, xBomba, yBomba, null);
+        g.drawImage(naranja, xNaranja, yNaranja, null);
+        g.drawImage(pina, xPina, yPina, null);
     }
     
     public void setBandera(){
@@ -140,6 +170,16 @@ public class JPanelThread extends JPanel implements Runnable{
         yBomba = -1000;
     }
     
+    public void resetearNaranjaCayendo(){
+        xNaranja = 0;
+        yNaranja = -4000;
+    }
+    
+    public void resetearPinaCayendo(){
+        xNaranja = 0;
+        yNaranja = -5000;
+    }
+    
     public void detener(){
         hiloPrincipal.stop();
     }
@@ -154,6 +194,8 @@ public class JPanelThread extends JPanel implements Runnable{
     private Image maiz = new ImageIcon(this.getClass().getResource("../vista/imagenes/maiz.png")).getImage();
     private Image tomate = new ImageIcon(this.getClass().getResource("../vista/imagenes/tomate.png")).getImage();
     private Image bomba = new ImageIcon(this.getClass().getResource("../vista/imagenes/bomba.png")).getImage();
+    private Image naranja = new ImageIcon(this.getClass().getResource("../vista/imagenes/naranja.png")).getImage();
+    private Image pina = new ImageIcon(this.getClass().getResource("../vista/imagenes/piña.png")).getImage();
     private int yCanasta=0;
     private int xCanasta=0;
     private int xMaiz = 0;
@@ -162,5 +204,9 @@ public class JPanelThread extends JPanel implements Runnable{
     private int yTomate = -1000;
     private int xBomba = 0;
     private int yBomba = -2000;
+    private int xNaranja = 0;
+    private int yNaranja = -4000;
+    private int xPina = 0;
+    private int yPina = -5000;
 
 }
