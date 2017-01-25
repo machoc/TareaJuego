@@ -10,6 +10,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -68,7 +70,12 @@ public class VentanaPrincipal extends JFrame implements Observer {
         vidas.setForeground(Color.GREEN);
         panelMarcador.add(vidas);
         labVidas=new JLabel("3");
-        panelMarcador.add(labVidas);       
+        panelMarcador.add(labVidas);
+        JLabel tiempo = new JLabel("         TIEMPO:   ");
+        tiempo.setForeground(Color.GREEN);
+        panelMarcador.add(tiempo);
+        labTiempo = new JLabel();
+        panelMarcador.add(labTiempo);
     }
     
     
@@ -93,10 +100,34 @@ public class VentanaPrincipal extends JFrame implements Observer {
                 btnIniciarPartida.setEnabled(false);
                 btnDetenerPartida.setEnabled(true);
                 panelCentral.setBandera();
+                tiempo = new Timer();
+                tiempoTask = new TimerTask() {
+                    @Override
+                    public void run() {
+                        seg++;                   
+                        if (seg<=60){
+                            if(seg<10){
+                                labTiempo.setText(String.valueOf(min) +":0"+String.valueOf(seg));
+                            }else{
+                                labTiempo.setText(String.valueOf(min) +":"+String.valueOf(seg));}
+                        }
+                        else{seg=0;min++;}
+                    }
+                };                                         
+                tiempo.schedule(tiempoTask,0,velocidad);
                 darFocusVentana();
-               
             }    
         });
+        btnDetenerPartida.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnIniciarPartida.setEnabled(true);
+                btnDetenerPartida.setEnabled(false);
+                panelCentral.detener();
+                tiempoTask.cancel();
+                darFocusVentana();
+            }
+        }); 
     }
     
     public void iniciar(){        
@@ -120,7 +151,13 @@ public class VentanaPrincipal extends JFrame implements Observer {
     private JPanel panelMarcador;
     private JLabel labVidas;
     private JLabel labPuntaje;
+    private JLabel labTiempo;
     private JButton btnIniciarPartida;
     private JButton btnDetenerPartida;
     private Control control;
+    private Timer tiempo ;
+    private TimerTask tiempoTask;
+    private int velocidad = 1000;
+    private int seg=0;
+    private int min=0;
 }
