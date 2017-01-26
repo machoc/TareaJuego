@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Timer;
@@ -18,12 +20,14 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import tareajuego.control.Control;
+import tareajuego.modelo.Jugador;
 
 
 public class VentanaPrincipal extends JFrame implements Observer {
 
-    public VentanaPrincipal(Control cont){
+    public VentanaPrincipal(Control cont, JFrame vent){
         control = cont;
+        ventanaPosiciones=vent;
         ajustarConfiguracionInicial();
         ajustarComponentes(getContentPane());
         agregarEventos();
@@ -54,10 +58,15 @@ public class VentanaPrincipal extends JFrame implements Observer {
         panelBotones.setBackground(Color.WHITE);
         panelPrincipal.add(panelBotones,BorderLayout.SOUTH);
         btnIniciarPartida=new JButton("INICIAR PARTIDA");
+        btnIniciarPartida.setForeground(Color.GREEN);
         panelBotones.add(btnIniciarPartida);
         btnDetenerPartida=new JButton("DETENER PARTIDA");
+         btnDetenerPartida.setForeground(Color.RED);
         btnDetenerPartida.setEnabled(false);
         panelBotones.add(btnDetenerPartida);
+        btnVerPosiciones=new JButton("VER POSICIONES");
+         btnVerPosiciones.setForeground(Color.yellow);
+        panelBotones.add(btnVerPosiciones);
         panelMarcador=new JPanel();
         panelMarcador.setBackground(Color.WHITE);
         panelPrincipal.add(panelMarcador,BorderLayout.NORTH);
@@ -79,7 +88,10 @@ public class VentanaPrincipal extends JFrame implements Observer {
     }
     
     
-    private void agregarEventos(){
+    
+    
+    private void agregarEventos(){        
+        
         this.addKeyListener(new KeyAdapter(){
         
             @Override
@@ -97,8 +109,16 @@ public class VentanaPrincipal extends JFrame implements Observer {
 
             @Override
             public void actionPerformed(ActionEvent ae) {
+                
                 btnIniciarPartida.setEnabled(false);
+                btnVerPosiciones.setEnabled(false);
                 btnDetenerPartida.setEnabled(true);
+                String nombre=null;
+                nombre=  JOptionPane.showInputDialog(null,"Escriba su nombre: ","Solicitud",JOptionPane.QUESTION_MESSAGE);
+                if(nombre.isEmpty())
+                    nombre="Anonimo";
+                Jugador jug =new Jugador(nombre);
+                control.agregarJugador(jug);
                 panelCentral.setBandera();
                 tiempo = new Timer();
                 tiempoTask = new TimerTask() {
@@ -121,13 +141,15 @@ public class VentanaPrincipal extends JFrame implements Observer {
         btnDetenerPartida.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                btnIniciarPartida.setEnabled(true);
-                btnDetenerPartida.setEnabled(false);
-                panelCentral.detener();
-                tiempoTask.cancel();
-                darFocusVentana();
+                control.resetear();
             }
         }); 
+        
+        btnVerPosiciones.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                ventanaPosiciones.setVisible(true);
+            }});
     }
     
     public void iniciar(){        
@@ -139,10 +161,41 @@ public class VentanaPrincipal extends JFrame implements Observer {
         this.requestFocus();
     }
     
+    public void detenerPartida(){
+       
+        tiempoTask.cancel();
+        seg=0;
+        min=0; 
+        labPuntaje.setText("0");
+        labPuntaje.setText("0");
+        panelCentral.detener();
+      //  control.guardarJugadores();
+        btnIniciarPartida.setEnabled(true);
+        btnVerPosiciones.setEnabled(true);
+        btnDetenerPartida.setEnabled(false);
+       
+    }
+    
+    
+    
     
     @Override
     public void update(Observable mod, Object eve) {
+        if (eve instanceof String){
+            if(eve.toString().equals("Resetear")){
+                labPuntaje.setText("0");
+                labVidas.setText("3");
+                detenerPartida();
+                JOptionPane.showMessageDialog(null,"Partida Finalizada..!!","Final de Partida",JOptionPane.INFORMATION_MESSAGE);
+            }
+            else
+                labPuntaje.setText(eve.toString());
+        }
         
+        else if(eve instanceof Integer){
+            labVidas.setText(String.valueOf(eve));
+        }
+        panelMarcador.repaint();
             }
  
     private JPanel panelPrincipal;
@@ -153,6 +206,7 @@ public class VentanaPrincipal extends JFrame implements Observer {
     private JLabel labPuntaje;
     private JLabel labTiempo;
     private JButton btnIniciarPartida;
+    private JButton btnVerPosiciones;
     private JButton btnDetenerPartida;
     private Control control;
     private Timer tiempo ;
@@ -160,4 +214,5 @@ public class VentanaPrincipal extends JFrame implements Observer {
     private int velocidad = 1000;
     private int seg=0;
     private int min=0;
+    private JFrame ventanaPosiciones;
 }

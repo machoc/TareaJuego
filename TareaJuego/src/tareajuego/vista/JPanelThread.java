@@ -25,34 +25,56 @@ public class JPanelThread extends JPanel implements Runnable{
                caidaNaranja();
                caidaPina();
                if (yMaiz>yCanasta-36 &&( xMaiz> xCanasta -28 && xMaiz< xCanasta +100)){
-                    resetearMaizCayendo();
+                   puntos+=50;
+                   control.setearPuntaje(puntos);
+                   comprobarSigVida();
+                   resetearMaizCayendo();
                }
                
                if(yMaiz > yCanasta+140){
+                   vidas-=1;
+                   comprobarVidas();
                    resetearMaizCayendo();
                }
                if(yTomate>yCanasta-36 &&( xTomate>xCanasta -28 && xTomate < xCanasta +100)){
+                   puntos+=100;
+                   control.setearPuntaje(puntos);
+                   comprobarSigVida();
                    resetearTomateCayendo();
                }
                if(yTomate > yCanasta+140){
+                   vidas-=1;
+                   comprobarVidas();
                    resetearTomateCayendo();
                }
                if(yBomba>yCanasta-36 &&( xBomba>xCanasta -28 && xBomba < xCanasta +100)){
+                   vidas-=1;
+                   comprobarVidas();
                    resetearBombaCayendo();
                }
                if(yBomba > yCanasta+140){
                    resetearBombaCayendo();
                }
                if(yNaranja>yCanasta-36 &&( xNaranja>xCanasta -28 && xNaranja < xCanasta +100)){
+                   puntos+=300;
+                   control.setearPuntaje(puntos);
+                   comprobarSigVida();
                    resetearNaranjaCayendo();
                }
                if(yNaranja > yCanasta+140){
+                   vidas-=1;
+                   comprobarVidas();
                    resetearNaranjaCayendo();
                }
                if(yPina>yCanasta-36 &&( xPina>xCanasta -28 && xPina < xCanasta +100)){
+                   puntos+=500;
+                   control.setearPuntaje(puntos);
+                   comprobarSigVida();
                    resetearPinaCayendo();
                }
                if(yPina > yPina+140){
+                   vidas-=1;
+                   comprobarVidas();
                    resetearPinaCayendo();
                }
                   
@@ -86,23 +108,23 @@ public class JPanelThread extends JPanel implements Runnable{
     }
     
     private void caidaMaiz(){
-        yMaiz += 3;
+        yMaiz += velocidadCaida;
     }
     
     private void caidaTomate(){
-        yTomate += 5;
+        yTomate += velocidadCaida;
     }
     
     private void caidaBomba(){
-        yBomba += 3;
+        yBomba += velocidadCaida;
     }
     
     private void caidaNaranja(){
-        yNaranja += 5;
+        yNaranja += velocidadCaida;
     }
     
     private void caidaPina(){
-        yPina+= 7;
+        yPina+= velocidadCaida;
     }
     
  
@@ -176,12 +198,43 @@ public class JPanelThread extends JPanel implements Runnable{
     }
     
     public void resetearPinaCayendo(){
-        xNaranja = 0;
-        yNaranja = -5000;
+        xPina = 0;
+        yPina = -6000;
     }
     
     public void detener(){
-        hiloPrincipal.stop();
+        
+        resetearMaizCayendo();
+        resetearTomateCayendo();
+        resetearBombaCayendo();
+        resetearNaranjaCayendo();  
+        resetearPinaCayendo();
+        vidas=3;
+        puntos=0;
+        setXYCanasta();
+        puntosSigVida =1000;
+        velocidadCaida=2;
+        bandera=false;
+    }
+    
+    public void comprobarSigVida(){
+        if (puntos>=puntosSigVida){
+            puntosSigVida+=1000;
+            velocidadCaida+=1;
+            vidas+=1;
+            comprobarVidas();
+        }
+    }
+    
+    public void comprobarVidas(){
+        if(vidas>3)
+            vidas--;
+        else if(vidas==0){
+            control.setearVidas(vidas);
+            control.resetear();
+        }
+        else
+            control.setearVidas(vidas);
     }
     
     //---ATRIBUTOS
@@ -196,6 +249,10 @@ public class JPanelThread extends JPanel implements Runnable{
     private Image bomba = new ImageIcon(this.getClass().getResource("../vista/imagenes/bomba.png")).getImage();
     private Image naranja = new ImageIcon(this.getClass().getResource("../vista/imagenes/naranja.png")).getImage();
     private Image pina = new ImageIcon(this.getClass().getResource("../vista/imagenes/piña.png")).getImage();
+    private int velocidadCaida = 2;
+    private int puntosSigVida = 1000;
+    private int puntos = 0;
+    private int vidas= 3;
     private int yCanasta=0;
     private int xCanasta=0;
     private int xMaiz = 0;
@@ -207,6 +264,6 @@ public class JPanelThread extends JPanel implements Runnable{
     private int xNaranja = 0;
     private int yNaranja = -4000;
     private int xPina = 0;
-    private int yPina = -5000;
+    private int yPina = -6000;
 
 }

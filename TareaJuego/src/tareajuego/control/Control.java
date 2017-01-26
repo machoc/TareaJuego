@@ -2,6 +2,8 @@
 package tareajuego.control;
 
 import java.util.Observer;
+import javax.swing.table.TableModel;
+import tareajuego.modelo.Jugador;
 import tareajuego.modelo.Modelo;
 
 
@@ -19,6 +21,28 @@ public class Control {
         modelo.addObserver(nuevoObserver);
     }
     
+    public TableModel modeloTabla(){
+        return modelo.modeloTabla();
+    }
+    
+    
+    
+     public void agregarJugador(Jugador nuevoJugador){
+         modelo.agregarJugador(nuevoJugador);
+     }
+     
+      public void setearPuntaje(int puntaje){
+         modelo.setPuntaje(puntaje);
+     }
+      
+       public void setearVidas(int vidas){
+         modelo.setVidas(vidas);
+     }
+       
+        public void resetear(){
+         modelo.resetear();
+     }
+     
    
      
     private Modelo modelo;
