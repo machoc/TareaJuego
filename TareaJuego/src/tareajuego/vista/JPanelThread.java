@@ -169,12 +169,12 @@ public class JPanelThread extends JPanel implements Runnable{
     
     public void moverIzquierda(){
         if(xCanasta > limiteIzquierdo)
-        xCanasta -= 15;
+        xCanasta -= 30;
     }
     
     public void moverDerecha(){
          if(xCanasta < limiteDerecho)
-         xCanasta += 15;
+         xCanasta += 30;
     }
     
     public void resetearMaizCayendo(){

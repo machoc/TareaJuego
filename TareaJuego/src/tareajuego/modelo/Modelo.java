@@ -32,6 +32,7 @@ public class Modelo extends Observable{
     
     public void resetear(){
        vidas=3;
+       jugadores.acomodarJugadores();
         actualizar("Resetear");
     }
     
