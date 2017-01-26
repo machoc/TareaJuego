@@ -5,8 +5,9 @@
         <group>
             <file>file:/Users/luisalejandro/Desktop/TareaJuego/TareaJuego/src/tareajuego/modelo/Modelo.java</file>
             <file>file:/Users/luisalejandro/Desktop/TareaJuego/TareaJuego/src/tareajuego/vista/VentanaPrincipal.java</file>
-            <file>file:/Users/luisalejandro/Desktop/TareaJuego/TareaJuego/src/tareajuego/control/Control.java</file>
             <file>file:/Users/luisalejandro/Desktop/TareaJuego/TareaJuego/src/tareajuego/vista/JPanelThread.java</file>
+            <file>file:/Users/luisalejandro/Desktop/TareaJuego/TareaJuego/src/tareajuego/modelo/Jugadores.java</file>
+            <file>file:/Users/luisalejandro/Desktop/TareaJuego/TareaJuego/src/tareajuego/control/Control.java</file>
         </group>
     </open-files>
 </project-private>
