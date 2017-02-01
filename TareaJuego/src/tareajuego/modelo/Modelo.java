@@ -12,6 +12,7 @@ public class Modelo extends Observable{
     
     public void agregarJugador(Jugador jug){
         jugadores.agregarJugador(jug);
+        jugadores.crearXML();
         actualizar(null);
     }
     
