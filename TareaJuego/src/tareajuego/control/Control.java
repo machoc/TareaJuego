@@ -43,7 +43,13 @@ public class Control {
          modelo.resetear();
      }
      
-   
+     public void guardarDatos(){
+         modelo.guardarDatos();
+     }
+     
+     public void cargarDatos(){
+         modelo.cargarDatos();
+     }
      
     private Modelo modelo;
 }

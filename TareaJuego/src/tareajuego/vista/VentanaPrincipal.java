@@ -154,6 +154,7 @@ public class VentanaPrincipal extends JFrame implements Observer {
     
     public void iniciar(){        
         control.registrar(this);
+        control.cargarDatos();
         setVisible(true);
     }
     
@@ -166,6 +167,7 @@ public class VentanaPrincipal extends JFrame implements Observer {
         tiempoTask.cancel();
         seg=0;
         min=0; 
+        labTiempo.setText(" :");
         labPuntaje.setText("0");
         labPuntaje.setText("0");
         panelCentral.detener();
@@ -173,6 +175,7 @@ public class VentanaPrincipal extends JFrame implements Observer {
         btnIniciarPartida.setEnabled(true);
         btnVerPosiciones.setEnabled(true);
         btnDetenerPartida.setEnabled(false);
+        control.guardarDatos();
        
     }
     

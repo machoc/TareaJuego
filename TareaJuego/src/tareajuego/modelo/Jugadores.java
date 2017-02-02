@@ -7,6 +7,7 @@ import java.util.Comparator;
 import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import xml.UtilidadesXML;
 
 
@@ -28,9 +29,7 @@ public class Jugadores {
         return jugadores.size();
     }
     
-    public void guardarJugadores(){
-        
-    }
+    
     
     public void acomodarJugadores(){
         Collections.sort(jugadores, new Comparator() {
@@ -43,18 +42,20 @@ public class Jugadores {
         });
     }
     
-    public void crearXML(){
-        try {       
-            Document d = UtilidadesXML.crearDocumento();
-            Node r = d.createElement("DatosJugador");
-            for(int i = 0; i < jugadores.size(); i ++){
-            r.appendChild(recuperarDatos(i).toXML(d));     
-            }
-            d.appendChild(r);  
-            UtilidadesXML.guardarArchivoXML(d, "jugadores.xml"); 
-            System.out.println("Programa finalizado..");
-        } catch (ParserConfigurationException ex) {
-            
+    public void guardar(Document doc,Node r){
+        for(int i =0;i<cantidadJugadores();i++){
+            r.appendChild(recuperarDatos(i).toXML(doc));
+        }
+    }
+    
+    public void cargar(Node nodo){
+        NodeList arbolEtiquetas = nodo.getChildNodes();
+        int numJugadores = arbolEtiquetas.getLength();
+        for (int i = 0; i < numJugadores; i++) {
+            Node etiquetaJugador = arbolEtiquetas.item(i);
+            Jugador nuevoJugador = new Jugador();
+            nuevoJugador.leerXML(etiquetaJugador);
+            jugadores.add(nuevoJugador);            
         }
     }
     

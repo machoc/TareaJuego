@@ -1,7 +1,9 @@
 package tareajuego.modelo;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import xml.UtilidadesXML;
 
 public class Jugador {
@@ -63,11 +65,18 @@ public class Jugador {
     }
 
     public Node toXML(Document doc) {
-        Node r = doc.createElement(getNodeName());
+        Node r = doc.createElement("jugador");
         r.appendChild(UtilidadesXML.crearNodo(doc, "nombre", nombre));
         r.appendChild(UtilidadesXML.crearNodo(doc, "puntaje", String.valueOf(puntaje)));
         return r;
     }
+     
+     public void leerXML(Node nodo) {        
+        NodeList arbolEtiquetas = nodo.getChildNodes(); 
+        nombre = ((Element)arbolEtiquetas.item(0)).getTextContent();
+        puntaje = Integer.parseInt(((Element)arbolEtiquetas.item(1)).getTextContent());
+    }
+    
     
     
     private static final String[] NOMBRE_CAMPOS={"Nombre","Puntaje"};
